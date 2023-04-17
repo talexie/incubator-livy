@@ -19,7 +19,7 @@ FROM openjdk:11-jdk-bullseye
 
 ARG SPARK_VERSION=3.3.2
 ARG HADOOP_VERSION=3
-ARG APACHE_LIVY=0.7.1
+ARG APACHE_LIVY=0.8.0
 
 # configure locale
 RUN apt-get update -qq > /dev/null && apt-get install -qq --yes --no-install-recommends \
