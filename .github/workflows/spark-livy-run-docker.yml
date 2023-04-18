@@ -36,10 +36,11 @@ jobs:
           if [ "${{ matrix.spark_version }}" = "3.0" ]; then echo "mvn_profile=-Pspark-3.0" >> $GITHUB_ENV; fi
       - 
         name: Build with Maven
-        run: mvn clean package -DskipTests -Dgenerate-third-party
+        run: mvn clean -DskipTests package
       - run: ls -l ./server/target/jars
       - run: ls -l ./assembly/target
-      - name: Build a binary release
+      - 
+        name: Build a binary release
         shell: bash
         run: |
           rm -rf ./release-staging
