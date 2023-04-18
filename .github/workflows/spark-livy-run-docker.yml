@@ -41,7 +41,6 @@ jobs:
           mvn clean -DskipTests -DskipITs -Dmaven.javadoc.skip=true -Pspark-3.0 package
           rm -rf ./release-staging
           mkdir ./release-staging
-          cd ./release-staging
           LIVY_VERSION="0.8.0-incubating-SNAPSHOT"
           BIN_ARCHIVE="apache-livy-$LIVY_VERSION-bin.zip"
           echo "Copying and signing regular binary distribution"
