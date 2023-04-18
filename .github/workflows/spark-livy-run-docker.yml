@@ -36,7 +36,7 @@ jobs:
           if [ "${{ matrix.spark_version }}" = "3.0" ]; then echo "mvn_profile=-Pspark-3.0" >> $GITHUB_ENV; fi
       - 
         name: Build with Maven
-        run: mvn clean -DskipTests package
+        run: mvn clean -DskipTests -DskipITs -Dmaven.javadoc.skip=true -Pspark-3.0 package
       - run: ls -l ./server/target/jars
       - run: ls -l ./assembly/target
       - 
@@ -47,7 +47,7 @@ jobs:
           mkdir ./release-staging
           cd ./release-staging
           if [ -z "$LIVY_VERSION" ]; then
-            LIVY_VERSION=$($MVN help:evaluate -Dexpression=project.version \
+            LIVY_VERSION=$(mvn help:evaluate -Dexpression=project.version \
               | grep -v INFO | grep -v WARNING | grep -v Download)
           fi
           BIN_ARCHIVE="apache-livy-$LIVY_VERSION-bin.zip"
