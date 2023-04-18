@@ -36,7 +36,7 @@ jobs:
           if [ "${{ matrix.spark_version }}" = "3.0" ]; then echo "mvn_profile=-Pspark-3.0" >> $GITHUB_ENV; fi
       - 
         name: Build with Maven
-        run: mvn -X package
+        run: mvn package
       - run: ls -l ./server/target
       -
         name: Login to Docker Hub
