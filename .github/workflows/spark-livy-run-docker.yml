@@ -36,8 +36,24 @@ jobs:
           if [ "${{ matrix.spark_version }}" = "3.0" ]; then echo "mvn_profile=-Pspark-3.0" >> $GITHUB_ENV; fi
       - 
         name: Build with Maven
-        run: mvn -DskipTests -Dmaven.javadoc.skip=true package
+        run: mvn clean package -DskipTests -Dgenerate-third-party
       - run: ls -l ./server/target/jars
+      - run: ls -l ./assembly/target
+      - name: Build a binary release
+        shell: bash
+        run: |
+          rm -rf ./release-staging
+          mkdir ./release-staging
+          cd ./release-staging
+          if [ -z "$LIVY_VERSION" ]; then
+            LIVY_VERSION=$($MVN help:evaluate -Dexpression=project.version \
+              | grep -v INFO | grep -v WARNING | grep -v Download)
+          fi
+          BIN_ARCHIVE="apache-livy-$LIVY_VERSION-bin.zip"
+          echo "Copying and signing regular binary distribution"
+          cp assembly/target/$BIN_ARCHIVE ./release-staging
+          echo "" | $GPG --passphrase-fd 0 --armour --output ./release-staging/$BIN_ARCHIVE.asc --detach-sig ./release-staging/$BIN_ARCHIVE
+          echo "" | $GPG --passphrase-fd 0 --print-md SHA512 ./release-staging/$BIN_ARCHIVE > ./release-staging/$BIN_ARCHIVE.sha512
       -
         name: Login to Docker Hub
         uses: docker/login-action@v2
