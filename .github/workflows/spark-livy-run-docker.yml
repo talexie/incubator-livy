@@ -41,10 +41,10 @@ jobs:
           mvn clean -DskipTests -DskipITs -Dmaven.javadoc.skip=true -Pspark-3.0 package
           rm -rf ./release-staging
           mkdir ./release-staging
+          GPG="gpg --no-tty --batch"
           LIVY_VERSION="0.8.0-incubating-SNAPSHOT"
           BIN_ARCHIVE="apache-livy-$LIVY_VERSION-bin.zip"
           echo "Copying and signing regular binary distribution"
-          ls -l ./assembly/target
           cp ./assembly/target/$BIN_ARCHIVE ./release-staging
           echo "" | $GPG --passphrase-fd 0 --armour --output ./release-staging/$BIN_ARCHIVE.asc --detach-sig ./release-staging/$BIN_ARCHIVE
           echo "" | $GPG --passphrase-fd 0 --print-md SHA512 ./release-staging/$BIN_ARCHIVE > ./release-staging/$BIN_ARCHIVE.sha512
