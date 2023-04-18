@@ -37,8 +37,6 @@ jobs:
       - 
         name: Build with Maven
         run: mvn clean -DskipTests -DskipITs -Dmaven.javadoc.skip=true -Pspark-3.0 package
-      - run: ls -l ./server/target/jars
-      - run: ls -l ./assembly/target
       - 
         name: Build a binary release
         shell: bash
@@ -46,10 +44,7 @@ jobs:
           rm -rf ./release-staging
           mkdir ./release-staging
           cd ./release-staging
-          if [ -z "$LIVY_VERSION" ]; then
-            LIVY_VERSION=$(mvn help:evaluate -Dexpression=project.version \
-              | grep -v INFO | grep -v WARNING | grep -v Download)
-          fi
+          LIVY_VERSION="0.8.0-incubating-SNAPSHOT"
           BIN_ARCHIVE="apache-livy-$LIVY_VERSION-bin.zip"
           echo "Copying and signing regular binary distribution"
           cp assembly/target/$BIN_ARCHIVE ./release-staging
