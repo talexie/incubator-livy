@@ -82,7 +82,7 @@
     <hadoop.version>3.2.1</hadoop.version>
     <hadoop.scope>compile</hadoop.scope>
     <spark.scala-2.11.version>2.4.5</spark.scala-2.11.version>
-    <spark.scala-2.12.version>3.1.1</spark.scala-2.12.version>
+    <spark.scala-2.12.version>3.3.2</spark.scala-2.12.version>
     <spark.version>${spark.scala-2.12.version}</spark.version>
     <hive.version>3.1.2</hive.version>
     <commons-codec.version>1.9</commons-codec.version>
@@ -106,19 +106,19 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <py4j.version>0.10.7</py4j.version>
     <scala-2.11.version>2.11.12</scala-2.11.version>
-    <scala-2.12.version>2.12.14</scala-2.12.version>
+    <scala-2.12.version>2.12.17</scala-2.12.version>
     <scala.binary.version>2.12</scala.binary.version>
     <scala.version>${scala-2.12.version}</scala.version>
     <scalatest.version>3.0.8</scalatest.version>
     <scalatra.version>2.6.5</scalatra.version>
-    <java.version>1.8</java.version>
+    <java.version>11</java.version>
     <test.redirectToFile>true</test.redirectToFile>
     <execution.root>${user.dir}</execution.root>
     <spark.home>${execution.root}/dev/spark</spark.home>
     <spark.bin.download.url>
-      https://archive.apache.org/dist/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz
+      https://archive.apache.org/dist/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz
     </spark.bin.download.url>
-    <spark.bin.name>spark-3.1.2-bin-hadoop3.3</spark.bin.name>
+    <spark.bin.name>spark-3.3.2-bin-hadoop3</spark.bin.name>
     <!--  used for testing, NCSARequestLog use it for access log  -->
     <livy.log.dir>${basedir}/target</livy.log.dir>
 
@@ -1061,21 +1061,21 @@
         </property>
       </activation>
       <properties>
-        <spark.scala-2.12.version>3.0.0</spark.scala-2.12.version>
+        <spark.scala-2.12.version>3.3.2</spark.scala-2.12.version>
         <spark.scala-2.11.version>2.4.5</spark.scala-2.11.version>
-        <spark.version>${spark.scala-2.11.version}</spark.version>
+        <spark.version>${spark.scala-2.12.version}</spark.version>
         <netty.spark-2.12.version>4.1.86.Final</netty.spark-2.12.version>
         <netty.spark-2.11.version>4.1.86.Final</netty.spark-2.11.version>
-        <netty.version>${netty.spark-2.11.version}</netty.version>
-        <java.version>1.8</java.version>
+        <netty.version>${netty.spark-2.12.version}</netty.version>
+        <java.version>11</java.version>
         <py4j.version>0.10.9</py4j.version>
         <json4s.spark-2.11.version>3.5.3</json4s.spark-2.11.version>
         <json4s.spark-2.12.version>3.6.6</json4s.spark-2.12.version>
-        <json4s.version>${json4s.spark-2.11.version}</json4s.version>
+        <json4s.version>${json4s.spark-2.12.version}</json4s.version>
         <spark.bin.download.url>
-          https://archive.apache.org/dist/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz
+          https://archive.apache.org/dist/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz
         </spark.bin.download.url>
-        <spark.bin.name>spark-3.0.0-bin-hadoop2.7</spark.bin.name>
+        <spark.bin.name>spark-3.3.2-bin-hadoop3</spark.bin.name>
       </properties>
     </profile>
 
