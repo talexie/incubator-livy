@@ -62,11 +62,13 @@ RUN python3 -m pip install \
         "requests >= 2.10.0" \
         "responses >= 0.5.1"
 # Install spark
-RUN mkdir -p /opt/spark &&  mkdir -p /opt/livy
+RUN mkdir -p /opt/spark &&  mkdir -p /opt/livy && mkdir -p /opt/release-staging
 RUN curl -L -o /opt/spark.tgz http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
     tar -xvzf /opt/spark.tgz -C /opt/spark --strip-components 1
 
-RUN ls -l 
+COPY release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip /opt/release-staging
+
+RUN ls -l release-staging
 RUN unzip -d /opt/livy release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip 
 
 RUN mv /opt/livy/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin /opt/livy/server
