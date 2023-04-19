@@ -22,7 +22,7 @@ ARG HADOOP_VERSION=3
 ARG APACHE_LIVY=0.8.0
 
 # configure locale
-RUN apt-get update -qq > /dev/null && apt-get install -qq --yes --no-install-recommends \
+RUN apt-get update -qq > /dev/null && apt-get install -qq --yes \
     locales && \
     locale-gen en_US.UTF-8
 ENV LANG="en_US.UTF-8" \
@@ -41,7 +41,8 @@ RUN apt-get install -qq \
     python3-pip \
     software-properties-common \
     wget \
-    unzip
+    unzip \
+    apt-utils
 
 # R 3.x install - ensure to add the signing key per https://cran.r-project.org/bin/linux/ubuntu/olderreleasesREADME.html
 RUN apt-get update && \
@@ -60,7 +61,8 @@ RUN python3 -m pip install \
         pytest-runner \
         requests-kerberos \
         "requests >= 2.10.0" \
-        "responses >= 0.5.1"
+        "responses >= 0.5.1" \
+        pyspark
 # Install spark
 RUN mkdir -p /opt/spark &&  mkdir -p /opt/livy && mkdir -p /opt/release-staging
 RUN curl -L -o /opt/spark.tgz http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
@@ -68,7 +70,6 @@ RUN curl -L -o /opt/spark.tgz http://archive.apache.org/dist/spark/spark-${SPARK
 
 COPY release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip /opt/release-staging
 
-RUN ls -l /opt/release-staging
 RUN unzip -d /opt/livy /opt/release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip 
 
 RUN mv /opt/livy/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin /opt/livy/server
@@ -86,6 +87,5 @@ RUN chmod 755 /start_server.sh
 WORKDIR /workspace
 
 EXPOSE 8998
-RUN ls -l /opt/livy/server
-# https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
+
 ENTRYPOINT ["/start_server.sh"]
