@@ -68,8 +68,8 @@ RUN curl -L -o /opt/spark.tgz http://archive.apache.org/dist/spark/spark-${SPARK
 
 COPY release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip /opt/release-staging
 
-RUN ls -l release-staging
-RUN unzip -d /opt/livy release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip 
+RUN ls -l /opt/release-staging
+RUN unzip -d /opt/livy /opt/release-staging/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin.zip 
 
 RUN mv /opt/livy/apache-livy-${APACHE_LIVY}-incubating-SNAPSHOT-bin /opt/livy/server
 
