@@ -19,7 +19,7 @@ if [ "$SPARK_MODE" == "master" ]; then
     EXEC=$(command -v start-master.sh)
     ARGS=()
     info "** Starting Spark Connect server in master mode **"
-elif [ "$SPARK_MODE" == "spark-connect" ]; then
+elif [ "$SPARK_MODE" == "sparkconnect" ]; then
     # Master constants
     EXEC=$(command -v start-connect-server.sh)
     ARGS=("--packages org.apache.spark:spark-connect_2.12:3.4.0")
