@@ -19,7 +19,7 @@ FROM bitnami/spark
 
 ENV APP_VERSION="3.4.0" 
 ARG SPARK_VERSION=3.4.0
-ARG HADOOP_VERSION=3.3
+ARG HADOOP_VERSION=3
 ARG APACHE_LIVY=0.8.0
 
 # configure locale
@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install -qq \
     curl \
     git \
     libkrb5-dev \
-    maven \
     python3-dev \
     python3-setuptools \
     python3-pip \
