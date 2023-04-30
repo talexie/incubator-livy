@@ -28,7 +28,7 @@ ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8"
 USER root
 # Install necessary dependencies for build/test
-RUN apt-get install -qq \
+RUN apt-get update && apt-get install -qq \
     apt-transport-https \
     curl \
     git \
